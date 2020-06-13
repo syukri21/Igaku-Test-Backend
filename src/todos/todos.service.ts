@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Todo } from './entity/todo.entity';
 import { Repository } from 'typeorm';
 import { CreateTodo } from './dto/create-todo.dto';
-import { User } from '../users/user.entity';
+import { User } from '../users/entity/user.entity';
 import { EditDto } from './dto/edit-todo.dto';
 import { validate } from 'class-validator';
 

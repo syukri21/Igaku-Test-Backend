@@ -8,8 +8,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Todo } from '../todos/entity/todo.entity';
-import { createPassword } from '../utils/index';
+import { Todo } from '../../todos/entity/todo.entity';
+import { createPassword } from '../../utils/index';
 import { IsEmail, IsDefined } from 'class-validator';
 
 @Entity()

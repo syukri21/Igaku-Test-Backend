@@ -31,8 +31,6 @@ export class UsersService {
       throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
     }
 
-    console.log(password);
-    console.log(user.password);
     // compare passwords
     const areEqual = await comparePasswords(user.password, password);
 

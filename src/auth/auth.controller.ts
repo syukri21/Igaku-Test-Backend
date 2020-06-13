@@ -6,8 +6,8 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Register } from '../users/register.dto';
-import { Login } from '../users/login.dto';
+import { Register } from '../users/dto/register.dto';
+import { Login } from '../users/dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')

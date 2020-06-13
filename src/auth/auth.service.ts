@@ -5,8 +5,8 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import { Register } from '../users/register.dto';
-import { Login } from '../users/login.dto';
+import { Register } from '../users/dto/register.dto';
+import { Login } from '../users/dto/login.dto';
 import passport from 'passport';
 import { JwtPayload } from './interfaces/payload.interface';
 import { JwtService } from '@nestjs/jwt';
@@ -15,8 +15,8 @@ import { UserDto } from '../users/dto/user.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async register(data: Register) {

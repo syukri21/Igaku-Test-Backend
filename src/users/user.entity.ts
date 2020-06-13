@@ -41,7 +41,7 @@ export class User {
 
   @Column({ select: false })
   @IsDefined()
-  private password: string;
+  password: string;
 
   @BeforeInsert()
   @BeforeUpdate()

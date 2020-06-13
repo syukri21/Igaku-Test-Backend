@@ -1,13 +1,6 @@
-import { Injectable, Get } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Todo } from './todo.entity';
-import {
-  ParsedRequest,
-  ParsedBody,
-  Override,
-  CrudRequest,
-} from '@nestjsx/crud';
 import { Repository } from 'typeorm';
 import { CreateTodo } from './create-todo.dto';
 

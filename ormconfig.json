@@ -6,5 +6,10 @@
   "password": "",
   "database": "igaku_test",
   "entities": ["src/**/**.entity{.ts,.js}"],
-  "synchronize": true
+  "migrationsTableName": "custom_migration_table",
+  "migrations": ["migration/*.js"],
+  "synchronize": true,
+  "cli": {
+    "migrationsDir": "migration"
+  }
 }

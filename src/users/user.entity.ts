@@ -7,6 +7,7 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
+  Unique,
 } from 'typeorm';
 import { createHmac } from 'crypto';
 import { Todo } from '../todos/todo.entity';
@@ -36,7 +37,9 @@ export class User {
   @IsDefined()
   lastName: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   @IsEmail()
   email: string;
 

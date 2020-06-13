@@ -3,6 +3,7 @@ import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Register } from './register.dto';
+import { validate } from 'class-validator';
 
 @Injectable()
 export class UsersService {
@@ -10,9 +11,15 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  createOne(body: Register) {
+  async createOne(body: Register) {
     const user = this.userRepository.create(body);
-    user.hashPassword();
-    return user;
+    const errors = await validate(user);
+    if (errors.length > 0) {
+      throw new Error(`Validation failed!`);
+    } else {
+      user.hashPassword();
+      await this.userRepository.save(user);
+      return { message: 'success' };
+    }
   }
 }

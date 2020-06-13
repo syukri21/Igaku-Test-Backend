@@ -7,21 +7,10 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
-  Unique,
 } from 'typeorm';
-import { Todo } from '../todos/todo.entity';
+import { Todo } from '../todos/entity/todo.entity';
 import { createPassword } from '../utils/index';
-import {
-  Contains,
-  IsInt,
-  Length,
-  IsEmail,
-  IsFQDN,
-  IsDate,
-  Min,
-  Max,
-  IsDefined,
-} from 'class-validator';
+import { IsEmail, IsDefined } from 'class-validator';
 
 @Entity()
 export class User {
@@ -61,7 +50,7 @@ export class User {
   updated_at: Date;
 
   @OneToMany(
-    type => Todo,
+    () => Todo,
     todo => todo.user,
   )
   todos: Todo[];

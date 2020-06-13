@@ -3,18 +3,17 @@ import {
   Get,
   Post,
   Body,
-  Req,
   UseGuards,
   Request,
+  Delete,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Crud } from '@nestjsx/crud';
-import { Todo } from './todo.entity';
-import { CreateTodo } from './create-todo.dto';
+import { Todo } from './entity/todo.entity';
+import { CreateTodo } from './dto/create-todo.dto';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
-import { JwtService } from '@nestjs/jwt';
-import { ExtractJwt } from 'passport-jwt';
 import { User } from '../users/user.entity';
+import { DeleteDto } from './dto/delete.dto';
 
 @Crud({
   model: {
@@ -36,5 +35,11 @@ export class TodosController {
   @Post()
   createOne(@Body() body: CreateTodo, @Request() req) {
     return this.todosService.createOne(body, req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  deleteOneOrMany(@Body() body: DeleteDto) {
+    return this.todosService.deleteOneOrMany(body.ids);
   }
 }

@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Req, UseGuards } from '@nestjs/common';
 import { TodosService } from './todos.service';
-import { Crud, CrudRequest } from '@nestjsx/crud';
+import { Crud } from '@nestjsx/crud';
 import { Todo } from './todo.entity';
 import { CreateTodo } from './create-todo.dto';
-import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 
 @Crud({
   model: {
@@ -14,12 +14,13 @@ import { AuthGuard } from '@nestjs/passport';
 export class TodosController {
   constructor(private todosService: TodosService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  @UseGuards(AuthGuard())
   getAllTodo() {
     return this.todosService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   createOne(@Body() body: CreateTodo) {
     return this.todosService.createOne(body);

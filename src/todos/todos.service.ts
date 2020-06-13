@@ -1,16 +1,9 @@
-import {
-  Injectable,
-  UseGuards,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Todo } from './entity/todo.entity';
 import { Repository } from 'typeorm';
 import { CreateTodo } from './dto/create-todo.dto';
 import { User } from '../users/user.entity';
-import { response } from 'express';
-import { stat } from 'fs';
 
 @Injectable()
 export class TodosService {
@@ -40,6 +33,25 @@ export class TodosService {
     await Promise.all(deleteAll);
     return {
       message: 'success',
+    };
+  }
+
+  async editOne(todo: Todo) {
+    const oldTodo = await this.todoRepository.findOne(todo.id);
+
+    if (!oldTodo) {
+      throw new HttpException('Doesnt Exist Todo', HttpStatus.BAD_REQUEST);
+    }
+
+    if (todo.task) oldTodo.task = todo.task;
+    if (todo.status === false || todo.status === true)
+      oldTodo.status = todo.status;
+
+    await this.todoRepository.save(oldTodo);
+
+    return {
+      message: 'success',
+      data: oldTodo,
     };
   }
 }

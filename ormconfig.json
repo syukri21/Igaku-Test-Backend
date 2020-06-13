@@ -7,9 +7,12 @@
   "database": "igaku_test",
   "entities": ["src/**/**.entity{.ts,.js}"],
   "migrationsTableName": "custom_migration_table",
-  "migrations": ["migration/*.js"],
+  "migrations": ["src/migrations/**/*{.ts,.js}"],
+  "migrationsRun": true,
+  "logging": true,
+  "logger": "file",
   "synchronize": true,
   "cli": {
-    "migrationsDir": "migration"
+    "migrationsDir": "src/migrations"
   }
 }

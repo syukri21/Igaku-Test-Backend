@@ -5,6 +5,8 @@ import {
   BeforeUpdate,
   OneToMany,
   Entity,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { createHmac } from 'crypto';
 import { Todo } from '../todos/todo.entity';
@@ -24,7 +26,7 @@ export class User {
   email: string;
 
   @Column({ select: false })
-  public password: string;
+  private password: string;
 
   @BeforeInsert()
   @BeforeUpdate()
@@ -33,6 +35,12 @@ export class User {
       this.password = createHmac('sha256', this.password).digest('hex');
     }
   }
+
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated_at: Date;
 
   @OneToMany(
     type => Todo,

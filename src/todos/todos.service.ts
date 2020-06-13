@@ -4,6 +4,7 @@ import { Todo } from './entity/todo.entity';
 import { Repository } from 'typeorm';
 import { CreateTodo } from './dto/create-todo.dto';
 import { User } from '../users/user.entity';
+import { EditDto } from './dto/edit-todo.dto';
 
 @Injectable()
 export class TodosService {
@@ -36,7 +37,7 @@ export class TodosService {
     };
   }
 
-  async editOne(todo: Todo) {
+  async editOne(todo: EditDto) {
     const oldTodo = await this.todoRepository.findOne(todo.id);
 
     if (!oldTodo) {

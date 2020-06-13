@@ -6,6 +6,7 @@ import {
   UseGuards,
   Request,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Crud } from '@nestjsx/crud';
@@ -14,6 +15,7 @@ import { CreateTodo } from './dto/create-todo.dto';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { User } from '../users/user.entity';
 import { DeleteDto } from './dto/delete.dto';
+import { EditDto } from './dto/edit-todo.dto';
 
 @Crud({
   model: {
@@ -41,5 +43,11 @@ export class TodosController {
   @Delete()
   deleteOneOrMany(@Body() body: DeleteDto) {
     return this.todosService.deleteOneOrMany(body.ids);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch()
+  editOne(@Body() body: EditDto) {
+    return this.todosService.editOne(body);
   }
 }

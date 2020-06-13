@@ -1,16 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { TodosService } from './todos/todos.service';
-import { TodosController } from './todos/todos.controller';
+import { Connection } from 'typeorm';
 import { TodosModule } from './todos/todos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [
-    TodosModule,
-    TypeOrmModule.forRoot({
-      autoLoadEntities: true,
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot({}), TodosModule],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection) {}
+}

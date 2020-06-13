@@ -31,4 +31,7 @@ export class Todo {
     user => user.todos,
   )
   user: User;
+
+  @Column()
+  userId: number;
 }

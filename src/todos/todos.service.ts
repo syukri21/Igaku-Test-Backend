@@ -39,12 +39,6 @@ export class TodosService {
   }
 
   async editOne(todo: EditDto) {
-    const errors = await validate(todo);
-
-    if (errors.length > 0) {
-      throw new HttpException('Error', HttpStatus.BAD_REQUEST);
-    }
-
     const oldTodo = await this.todoRepository.findOne(todo.id);
 
     if (!oldTodo) {

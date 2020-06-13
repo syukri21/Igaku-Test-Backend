@@ -14,7 +14,7 @@ import { Todo } from './entity/todo.entity';
 import { CreateTodo } from './dto/create-todo.dto';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { User } from '../users/user.entity';
-import { DeleteDto } from './dto/delete.dto';
+import { DeleteDto } from './dto/delete-todo.dto';
 import { EditDto } from './dto/edit-todo.dto';
 
 @Crud({

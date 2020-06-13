@@ -8,7 +8,6 @@ import {
 import { AuthService } from './auth.service';
 import { Register } from '../users/dto/register.dto';
 import { Login } from '../users/dto/login.dto';
-import { validate } from 'class-validator';
 
 @Controller('auth')
 export class AuthController {
@@ -24,14 +23,6 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() login: Login) {
-    const data = new Login();
-    data.password = login.password;
-    data.email = login.email;
-    const errors = await validate(data);
-    if (errors.length > 0) {
-      throw new HttpException('Validation Failed', HttpStatus.BAD_REQUEST);
-    } else {
-      return await this.authService.login(login);
-    }
+    return await this.authService.login(login);
   }
 }

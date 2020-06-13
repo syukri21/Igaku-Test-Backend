@@ -1,7 +1,5 @@
-import { Entity } from 'typeorm';
 import { IsDefined, IsEmail, Length } from 'class-validator';
 
-@Entity()
 export class Register {
   @IsDefined()
   firstName: string;

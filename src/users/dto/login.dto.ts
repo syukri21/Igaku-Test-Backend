@@ -1,7 +1,5 @@
 import { IsEmail, IsDefined, Length } from 'class-validator';
-import { Entity, Column } from 'typeorm';
 
-@Entity()
 export class Login {
   @IsDefined()
   @IsEmail()

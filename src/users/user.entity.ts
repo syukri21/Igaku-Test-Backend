@@ -4,10 +4,12 @@ import {
   BeforeInsert,
   BeforeUpdate,
   OneToMany,
+  Entity,
 } from 'typeorm';
 import { createHmac } from 'crypto';
 import { Todo } from '../todos/todo.entity';
 
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

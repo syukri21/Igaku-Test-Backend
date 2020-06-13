@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { createHmac } from 'crypto';
 import { Todo } from '../todos/todo.entity';
+import { createPassword } from '../utils/index';
 import {
   Contains,
   IsInt,
@@ -39,15 +40,15 @@ export class User {
   @IsEmail()
   email: string;
 
-  @Column({ select: false })
+  @Column()
   @IsDefined()
   password: string;
 
   @BeforeInsert()
   @BeforeUpdate()
-  hashPassword() {
+  async hashPassword() {
     if (this.password) {
-      this.password = createHmac('sha256', this.password).digest('hex');
+      this.password = await createPassword(this.password);
     }
   }
 

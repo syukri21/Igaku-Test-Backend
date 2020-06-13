@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Register } from './dto/register.dto';
 import { validate } from 'class-validator';
 import { UserDto } from './dto/user.dto';
+import { comparePasswords } from '../utils/index';
+import { toUserDto } from '../utils/mapper';
 
 @Injectable()
 export class UsersService {
@@ -18,17 +20,27 @@ export class UsersService {
     if (errors.length > 0) {
       throw new Error(`Validation failed!`);
     } else {
-      user.hashPassword();
       await this.userRepository.save(user);
       return { message: 'success' };
     }
   }
 
-  findByLogin(email: string, password: string) {
-    const user = this.userRepository.create();
-    user.email = email;
-    user.password = password;
-    return this.userRepository.findOne(user);
+  async findByLogin(email: string, password: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+    }
+
+    console.log(password);
+    console.log(user.password);
+    // compare passwords
+    const areEqual = await comparePasswords(user.password, password);
+
+    if (!areEqual) {
+      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+    }
+
+    return toUserDto(user);
   }
 
   async findByPayload({ email }: any): Promise<User> {

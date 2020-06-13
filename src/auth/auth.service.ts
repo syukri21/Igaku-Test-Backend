@@ -57,7 +57,7 @@ export class AuthService {
     return user;
   }
 
-  private _createToken({ email }: Login): any {
+  private _createToken({ email }: UserDto): any {
     const expiresIn = process.env.EXPIRESIN;
 
     const user: JwtPayload = { email };

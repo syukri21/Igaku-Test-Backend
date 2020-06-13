@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Todo } from './todo.entity';
 import { Repository } from 'typeorm';
@@ -9,6 +9,7 @@ export class TodosService {
   constructor(
     @InjectRepository(Todo) private todoRepository: Repository<Todo>,
   ) {}
+
   findAll(): Promise<Todo[]> {
     return this.todoRepository.find();
   }

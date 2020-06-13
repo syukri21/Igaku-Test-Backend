@@ -10,6 +10,17 @@ import {
 } from 'typeorm';
 import { createHmac } from 'crypto';
 import { Todo } from '../todos/todo.entity';
+import {
+  Contains,
+  IsInt,
+  Length,
+  IsEmail,
+  IsFQDN,
+  IsDate,
+  Min,
+  Max,
+  IsDefined,
+} from 'class-validator';
 
 @Entity()
 export class User {
@@ -17,15 +28,19 @@ export class User {
   id: number;
 
   @Column()
+  @IsDefined()
   firstName: string;
 
   @Column()
+  @IsDefined()
   lastName: string;
 
   @Column()
+  @IsEmail()
   email: string;
 
   @Column({ select: false })
+  @IsDefined()
   private password: string;
 
   @BeforeInsert()

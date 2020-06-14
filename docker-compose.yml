@@ -14,7 +14,7 @@ services:
     env_file:
       - .env
     networks:
-      - webnet
+      - host
     depends_on:
       - mysql
   mysql:
@@ -40,7 +40,7 @@ services:
     volumes:
       - my-db:/var/lib/mysql
     networks:
-      - webnet
+      - host
   # Names our volume
 volumes:
   my-db:

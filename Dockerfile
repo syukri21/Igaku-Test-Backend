@@ -11,7 +11,8 @@ RUN npm i -g rimraf
 RUN npm i -g glob
 RUN npm i -g typescript
 RUN npm run build
-RUN npm run start
+
+CMD ["node", "dist/main"]
 
 # FROM node:12.13-alpine as production
 

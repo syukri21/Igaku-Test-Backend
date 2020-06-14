@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 RUN npm i -g rimraf
 RUN npm i -g glob
-run npm i -g typescript
+RUN npm i -g typescript
 RUN npm run build
 
 FROM node:12.13-alpine as production

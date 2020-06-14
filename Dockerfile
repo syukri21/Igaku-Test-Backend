@@ -10,6 +10,7 @@ COPY . .
 RUN npm i -g rimraf
 RUN npm i -g glob
 RUN npm i -g typescript
+RUN npm install -g @nestjs/cli
 RUN npm run build
 
 CMD ["node", "dist/main"]

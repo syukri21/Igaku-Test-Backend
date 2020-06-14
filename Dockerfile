@@ -4,11 +4,12 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=development
+RUN npm install 
 
 COPY . .
 RUN npm i -g rimraf
-RUN npm install -g glob
+RUN npm i -g glob
+run npm i -g typescript
 RUN npm run build
 
 FROM node:12.13-alpine as production

@@ -10,7 +10,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
-      - 3030:3030
+      - 5000:5000
     command: npm run start:dev
     env_file:
       - .env

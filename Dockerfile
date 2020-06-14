@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install --only=development
 
 COPY . .
-RUN rm -rf dist
+RUN npm i -g rimraf
 RUN npm run build
 
 FROM node:12.13-alpine as production

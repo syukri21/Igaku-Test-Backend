@@ -39,7 +39,7 @@ services:
     # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
-    network:
+    networks:
       - nest_net
   # Names our volume
 volumes:

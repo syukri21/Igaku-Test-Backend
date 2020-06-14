@@ -4,7 +4,6 @@ services:
     container_name: main
     build:
       context: .
-      target: development
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

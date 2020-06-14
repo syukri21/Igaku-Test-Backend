@@ -14,7 +14,7 @@ services:
     env_file:
       - .env
     networks:
-      - host
+      - nest_net
     depends_on:
       - mysql
   mysql:
@@ -39,8 +39,11 @@ services:
     # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
-    networks:
-      - host
+    network:
+      - nest_net
   # Names our volume
 volumes:
   my-db:
+networks:
+  nest_net:
+    driver: overlay

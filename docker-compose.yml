@@ -3,7 +3,7 @@ services:
   main:
     container_name: main
     build:
-    context: .
+      context: .
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

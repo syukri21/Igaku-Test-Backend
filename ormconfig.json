@@ -1,6 +1,6 @@
 {
   "type": "mysql",
-  "host": "http://ec2-18-191-129-34.us-east-2.compute.amazonaws.com/",
+  "host": "localhost",
   "port": 3306,
   "username": "root",
   "password": "",

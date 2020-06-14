@@ -8,6 +8,7 @@ RUN npm install --only=development
 
 COPY . .
 RUN npm i -g rimraf
+RUN npm install -g glob
 RUN npm run build
 
 FROM node:12.13-alpine as production
